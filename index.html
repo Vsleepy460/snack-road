@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Snack Road - School Snacks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .dark-mode {
+      background: #121212;
+      color: #eee;
+    }
+
+    header {
+      background-color: #222;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .dark-mode .container {
+      background: #1f1f1f;
+    }
+
+    h2 {
+      border-bottom: 2px solid #eee;
+      padding-bottom: 0.5rem;
+    }
+
+    ul.menu {
+      list-style: none;
+      padding-left: 1rem;
+    }
+
+    ul.submenu {
+      list-style-type: disc;
+      margin-left: 1.5rem;
+      color: #555;
+    }
+
+    form label {
+      display: block;
+      margin-top: 1rem;
+    }
+
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    form button {
+      margin-top: 1.5rem;
+      background-color: #222;
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #444;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .note {
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    .payment-options {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: #f1f1f1;
+      border-radius: 6px;
+    }
+
+    .dark-mode .payment-options {
+      background: #2a2a2a;
+    }
+
+    .icon {
+      margin-right: 8px;
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #222;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+<div class="toggle-btn" onclick="toggleDarkMode()">🌓 Dark Mode</div>
+
+<header>
+  <h1><i class="fas fa-cookie-bite icon"></i> The Snack Road</h1>
+  <p>Your favorite snacks, right at school</p>
+</header>
+
+<div class="container">
+  <h2><i class="fas fa-list icon"></i> Menu</h2>
+  <ul class="menu">
+    <li><strong>Chips – $1.50</strong>
+      <ul class="submenu">
+        <li>Doritos</li>
+        <li>Hot Chips</li>
+        <li>Regular Chips</li>
+      </ul>
+    </li>
+    <li><strong>Drinks</strong>
+      <ul class="submenu">
+        <li>Dr Pepper – $2.00</li>
+        <li>Mountain Dew – $2.00</li>
+        <li>Baja Blast – $2.00</li>
+        <li>Sprite – $2.00</li>
+        <li>Gatorade – $2.00</li>
+        <li>Water – $1.00</li>
+      </ul>
+    </li>
+    <li><strong>Candy</strong>
+      <ul class="submenu">
+        <li>Skittles – $1.00</li>
+        <li>Snickers – $1.00</li>
+        <li>Sour Patch – $1.50</li>
+        <li>Gummies – $1.00</li>
+        <li>Reese – $1.00</li>
+        <li>KitKat – $1.00</li>
+        <li>Other – $0.50 to $2.00</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2><i class="fas fa-shopping-cart icon"></i> Place an Order</h2>
+  <form id="orderForm">
+    <label for="customerName">Your Name:</label>
+    <input type="text" id="customerName" required>
+
+    <label for="category">Choose Category:</label>
+    <select id="category" required>
+      <option value="">-- Select Category --</option>
+      <option value="Chips">Chips</option>
+      <option value="Drinks">Drinks</option>
+      <option value="Candy">Candy</option>
+    </select>
+
+    <label for="item">Choose Item:</label>
+    <select id="item" required>
+      <option value="">-- Select Item --</option>
+    </select>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" min="1" max="10" required>
+
+    <label for="notes">Special Instructions (optional):</label>
+    <textarea id="notes" rows="3" placeholder="Flavor, size, etc."></textarea>
+
+    <button type="submit">Submit Order</button>
+  </form>
+
+  <div class="payment-options">
+    <h3><i class="fas fa-money-bill-wave icon"></i> Payment Options</h3>
+    <ul>
+      <li>In school (cash)</li>
+      <li><a href="https://cash.app/" target="_blank">Cash App</a></li>
+      <li><a href="https://www.venmo.com/" target="_blank">Venmo</a></li>
+      <li><a href="https://www.paypal.com/" target="_blank">PayPal</a></li>
+    </ul>
+    <p class="note">We’ll contact you to confirm payment method after you order.</p>
+  </div>
+
+  <p><strong>Contact:</strong> <a href="mailto:yesbnsn@gmail.com">yesbnsn@gmail.com</a></p>
+</div>
+
+<footer>
+  &copy; 2025 The Snack Road. Snack smart.
+</footer>
+
+<script>
+  const itemOptions = {
+    Chips: [
+      "Doritos", "Hot Chips", "Regular Chips"
+    ],
+    Drinks: [
+      "Dr Pepper", "Mountain Dew", "Baja Blast", "Sprite", "Gatorade", "Water"
+    ],
+    Candy: [
+      "Skittles", "Snickers", "Sour Patch", "Gummies", "Reese", "KitKat", "Other"
+    ]
+  };
+
+  document.getElementById("category").addEventListener("change", function () {
+    const category = this.value;
+    const itemSelect = document.getElementById("item");
+    itemSelect.innerHTML = '<option value="">-- Select Item --</option>';
+
+    if (itemOptions[category]) {
+      itemOptions[category].forEach(item => {
+        const option = document.createElement("option");
+        option.value = item;
+        option.textContent = item;
+        itemSelect.appendChild(option);
+      });
+    }
+  });
+
+  document.getElementById("orderForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const data = {
+      name: document.getElementById("customerName").value,
+      category: document.getElementById("category").value,
+      item: document.getElementById("item").value,
+      quantity: document.getElementById("quantity").value,
+      notes: document.getElementById("notes").value
+    };
+
+    fetch('https://script.google.com/macros/s/AKfycby9ZvXwIQ73H_24AlC7WqnPLZinedHjGr6kEsfLHKC0lAXR57v-JaUWybV1WsB32ynS/exec', {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    alert("Order submitted! We'll contact you for payment.");
+    this.reset();
+  });
+
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+  }
+</script>
+</body>
+</html>
