@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>The Snack Road - School Snacks</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>The Snack Road</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f7f7f7;
-      margin: 0;
-      padding: 0;
-      color: #333;
-      transition: background 0.3s, color 0.3s;
+    :root {
+      --bg: #ffffff;
+      --text: #222222;
+      --card: #f7f7f7;
+    }
+    body.dark {
+      --bg: #121212;
+      --text: #f0f0f0;
+      --card: #1e1e1e;
     }
 
-    .dark-mode {
-      background: #121212;
-      color: #eee;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      transition: background 0.3s, color 0.3s;
     }
 
     header {
@@ -31,37 +36,24 @@
       max-width: 700px;
       margin: 2rem auto;
       padding: 1rem;
-      background: white;
+      background: var(--card);
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .dark-mode .container {
-      background: #1f1f1f;
-    }
-
-    h2 {
+    h2, h3 {
       border-bottom: 2px solid #eee;
       padding-bottom: 0.5rem;
     }
 
-    ul.menu {
-      list-style: none;
-      padding-left: 1rem;
-    }
-
-    ul.submenu {
-      list-style-type: disc;
-      margin-left: 1.5rem;
-      color: #555;
-    }
-
-    form label {
+    label {
       display: block;
-      margin-top: 1rem;
+      margin: 0.75rem 0;
     }
 
-    form input, form select, form textarea {
+    input[type="text"],
+    input[type="number"],
+    textarea {
       width: 100%;
       padding: 0.5rem;
       margin-top: 0.3rem;
@@ -69,18 +61,32 @@
       border-radius: 4px;
     }
 
-    form button {
+    button {
       margin-top: 1.5rem;
       background-color: #222;
       color: white;
-      padding: 0.75rem;
+      padding: 0.75rem 1.5rem;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
 
-    form button:hover {
+    button:hover {
       background-color: #444;
+    }
+
+    .note {
+      font-size: 0.85rem;
+      color: #888;
+      display: block;
+      margin-left: 1.2rem;
+    }
+
+    .payment-options {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1.5rem;
     }
 
     footer {
@@ -90,189 +96,114 @@
       color: #666;
     }
 
-    .note {
-      font-size: 0.85rem;
-      color: #777;
-    }
-
-    .payment-options {
+    .toggle-container {
+      text-align: center;
       margin-top: 1rem;
-      padding: 0.75rem;
-      background: #f1f1f1;
-      border-radius: 6px;
-    }
-
-    .dark-mode .payment-options {
-      background: #2a2a2a;
-    }
-
-    .icon {
-      margin-right: 8px;
-      animation: bounce 1s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-5px);
-      }
-    }
-
-    .toggle-btn {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: #222;
-      color: white;
-      padding: 10px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      z-index: 999;
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>The Snack Road</h1>
+    <p>Your favorite snacks, right at school</p>
+  </header>
 
-<div class="toggle-btn" onclick="toggleDarkMode()">🌓 Dark Mode</div>
-
-<header>
-  <h1><i class="fas fa-cookie-bite icon"></i> The Snack Road</h1>
-  <p>Your favorite snacks, right at school</p>
-</header>
-
-<div class="container">
-  <h2><i class="fas fa-list icon"></i> Menu</h2>
-  <ul class="menu">
-    <li><strong>Chips – $1.50</strong>
-      <ul class="submenu">
-        <li>Doritos</li>
-        <li>Hot Chips</li>
-        <li>Regular Chips</li>
-      </ul>
-    </li>
-    <li><strong>Drinks</strong>
-      <ul class="submenu">
-        <li>Dr Pepper – $2.00</li>
-        <li>Mountain Dew – $2.00</li>
-        <li>Baja Blast – $2.00</li>
-        <li>Sprite – $2.00</li>
-        <li>Gatorade – $2.00</li>
-        <li>Water – $1.00</li>
-      </ul>
-    </li>
-    <li><strong>Candy</strong>
-      <ul class="submenu">
-        <li>Skittles – $1.00</li>
-        <li>Snickers – $1.00</li>
-        <li>Sour Patch – $1.50</li>
-        <li>Gummies – $1.00</li>
-        <li>Reese – $1.00</li>
-        <li>KitKat – $1.00</li>
-        <li>Other – $0.50 to $2.00</li>
-      </ul>
-    </li>
-  </ul>
-
-  <h2><i class="fas fa-shopping-cart icon"></i> Place an Order</h2>
-  <form id="orderForm">
-    <label for="customerName">Your Name:</label>
-    <input type="text" id="customerName" required>
-
-    <label for="category">Choose Category:</label>
-    <select id="category" required>
-      <option value="">-- Select Category --</option>
-      <option value="Chips">Chips</option>
-      <option value="Drinks">Drinks</option>
-      <option value="Candy">Candy</option>
-    </select>
-
-    <label for="item">Choose Item:</label>
-    <select id="item" required>
-      <option value="">-- Select Item --</option>
-    </select>
-
-    <label for="quantity">Quantity:</label>
-    <input type="number" id="quantity" min="1" max="10" required>
-
-    <label for="notes">Special Instructions (optional):</label>
-    <textarea id="notes" rows="3" placeholder="Flavor, size, etc."></textarea>
-
-    <button type="submit">Submit Order</button>
-  </form>
-
-  <div class="payment-options">
-    <h3><i class="fas fa-money-bill-wave icon"></i> Payment Options</h3>
-    <ul>
-      <li>In school (cash)</li>
-      <li><a href="https://cash.app/" target="_blank">Cash App</a></li>
-      <li><a href="https://www.venmo.com/" target="_blank">Venmo</a></li>
-      <li><a href="https://www.paypal.com/" target="_blank">PayPal</a></li>
-    </ul>
-    <p class="note">We’ll contact you to confirm payment method after you order.</p>
+  <div class="toggle-container">
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
   </div>
 
-  <p><strong>Contact:</strong> <a href="mailto:yesbnsn@gmail.com">yesbnsn@gmail.com</a></p>
-</div>
+  <div class="container">
+    <h2>Place an Order</h2>
+    <form id="orderForm">
+      <label for="customerName">Your Name:</label>
+      <input type="text" id="customerName" name="name" required>
 
-<footer>
-  &copy; 2025 The Snack Road. Snack smart.
-</footer>
+      <h3>Chips ($1.50)</h3>
+      <label>
+        <input type="checkbox" name="items" value="Doritos ($1.50)"> Doritos ($1.50)
+        <span class="note">(Specify Red, Blue, or Purple in special instructions)</span>
+      </label>
+      <label>
+        <input type="checkbox" name="items" value="Ruffles ($1.50)"> Ruffles ($1.50)
+      </label>
+      <label>
+        <input type="checkbox" name="items" value="Lays ($1.50)"> Lays ($1.50)
+      </label>
+      <label>
+        <input type="checkbox" name="items" value="Fritos ($1.50)"> Fritos ($1.50)
+      </label>
+      <label>
+        <input type="checkbox" name="items" value="SunChips ($1.50)"> SunChips ($1.50)
+      </label>
 
-<script>
-  const itemOptions = {
-    Chips: [
-      "Doritos", "Hot Chips", "Regular Chips"
-    ],
-    Drinks: [
-      "Dr Pepper", "Mountain Dew", "Baja Blast", "Sprite", "Gatorade", "Water"
-    ],
-    Candy: [
-      "Skittles", "Snickers", "Sour Patch", "Gummies", "Reese", "KitKat", "Other"
-    ]
-  };
+      <h3>Drinks ($2.00)</h3>
+      <label><input type="checkbox" name="items" value="Dr Pepper ($2.00)"> Dr Pepper</label>
+      <label><input type="checkbox" name="items" value="Mountain Dew ($2.00)"> Mountain Dew</label>
+      <label><input type="checkbox" name="items" value="Baja Blast ($2.00)"> Baja Blast</label>
+      <label><input type="checkbox" name="items" value="Sprite ($2.00)"> Sprite</label>
+      <label><input type="checkbox" name="items" value="Gatorade ($2.00)"> Gatorade</label>
 
-  document.getElementById("category").addEventListener("change", function () {
-    const category = this.value;
-    const itemSelect = document.getElementById("item");
-    itemSelect.innerHTML = '<option value="">-- Select Item --</option>';
+      <h3>Candy ($1.00 - $1.50)</h3>
+      <label><input type="checkbox" name="items" value="Skittles ($1.00)"> Skittles ($1.00)</label>
+      <label><input type="checkbox" name="items" value="Snickers ($1.00)"> Snickers ($1.00)</label>
+      <label><input type="checkbox" name="items" value="Sour Patch ($1.50)"> Sour Patch ($1.50)</label>
+      <label><input type="checkbox" name="items" value="Gummies ($1.00)"> Gummies ($1.00)</label>
+      <label><input type="checkbox" name="items" value="Reese's ($1.00)"> Reese's ($1.00)</label>
+      <label><input type="checkbox" name="items" value="KitKat ($1.00)"> KitKat ($1.00)</label>
 
-    if (itemOptions[category]) {
-      itemOptions[category].forEach(item => {
-        const option = document.createElement("option");
-        option.value = item;
-        option.textContent = item;
-        itemSelect.appendChild(option);
-      });
+      <label for="instructions">Special Instructions:</label>
+      <textarea id="instructions" name="instructions" placeholder="e.g., Blue Doritos"></textarea>
+
+      <button type="submit">Submit Order</button>
+    </form>
+
+    <div class="payment-options">
+      <h3>Payment Options</h3>
+      <ul>
+        <li>Cash (in school)</li>
+        <li><a href="https://cash.app/$YourCashAppUsername" target="_blank">Cash App</a></li>
+        <li><a href="https://venmo.com/YourVenmoUsername" target="_blank">Venmo</a></li>
+        <li><a href="https://paypal.me/YourPayPalLink" target="_blank">PayPal</a></li>
+      </ul>
+      <p class="note">We’ll contact you to confirm payment after your order is placed.</p>
+    </div>
+
+    <p><strong>Contact:</strong> <a href="mailto:yesbnsn@gmail.com">yesbnsn@gmail.com</a></p>
+  </div>
+
+  <footer>
+    &copy; 2025 The Snack Road. Snack smart.
+  </footer>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
     }
-  });
 
-  document.getElementById("orderForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby9ZvXwIQ73H_24AlC7WqnPLZinedHjGr6kEsfLHKC0lAXR57v-JaUWybV1WsB32ynS/exec';
 
-    const data = {
-      name: document.getElementById("customerName").value,
-      category: document.getElementById("category").value,
-      item: document.getElementById("item").value,
-      quantity: document.getElementById("quantity").value,
-      notes: document.getElementById("notes").value
-    };
-
-    fetch('https://script.google.com/macros/s/AKfycby9ZvXwIQ73H_24AlC7WqnPLZinedHjGr6kEsfLHKC0lAXR57v-JaUWybV1WsB32ynS/exec', {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const name = form.name.value;
+      const instructions = form.instructions.value;
+      const items = Array.from(form.querySelectorAll('input[name="items"]:checked')).map(item => item.value).join(', ');
+      
+      fetch(scriptURL, {
+        method: 'POST',
+        body: new URLSearchParams({
+          'Name': name,
+          'Items': items,
+          'Instructions': instructions
+        })
+      }).then(response => {
+        alert('Order submitted! ✅');
+        form.reset();
+      }).catch(error => {
+        alert('Error! Try again later.');
+        console.error('Error!', error.message);
+      });
     });
-
-    alert("Order submitted! We'll contact you for payment.");
-    this.reset();
-  });
-
-  function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-  }
-</script>
+  </script>
 </body>
 </html>
