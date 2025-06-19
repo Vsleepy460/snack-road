@@ -119,91 +119,17 @@
       <input type="text" id="customerName" name="name" required>
 
       <h3>Chips ($1.50)</h3>
-      <label>
-        <input type="checkbox" name="items" value="Doritos ($1.50)"> Doritos ($1.50)
+      <label><input type="checkbox" name="items" value="Doritos ($1.50)"> Doritos ($1.50)
         <span class="note">(Specify Red, Blue, or Purple in special instructions)</span>
       </label>
-      <label>
-        <input type="checkbox" name="items" value="Ruffles ($1.50)"> Ruffles ($1.50)
-      </label>
-      <label>
-        <input type="checkbox" name="items" value="Lays ($1.50)"> Lays ($1.50)
-      </label>
-      <label>
-        <input type="checkbox" name="items" value="Fritos ($1.50)"> Fritos ($1.50)
-      </label>
-      <label>
-        <input type="checkbox" name="items" value="SunChips ($1.50)"> SunChips ($1.50)
-      </label>
+      <label><input type="checkbox" name="items" value="Ruffles ($1.50)"> Ruffles ($1.50)</label>
+      <label><input type="checkbox" name="items" value="Lays ($1.50)"> Lays ($1.50)</label>
+      <label><input type="checkbox" name="items" value="Fritos ($1.50)"> Fritos ($1.50)</label>
+      <label><input type="checkbox" name="items" value="SunChips ($1.50)"> SunChips ($1.50)</label>
 
       <h3>Drinks ($2.00)</h3>
       <label><input type="checkbox" name="items" value="Dr Pepper ($2.00)"> Dr Pepper</label>
       <label><input type="checkbox" name="items" value="Mountain Dew ($2.00)"> Mountain Dew</label>
       <label><input type="checkbox" name="items" value="Baja Blast ($2.00)"> Baja Blast</label>
       <label><input type="checkbox" name="items" value="Sprite ($2.00)"> Sprite</label>
-      <label><input type="checkbox" name="items" value="Gatorade ($2.00)"> Gatorade</label>
-
-      <h3>Candy ($1.00 - $1.50)</h3>
-      <label><input type="checkbox" name="items" value="Skittles ($1.00)"> Skittles ($1.00)</label>
-      <label><input type="checkbox" name="items" value="Snickers ($1.00)"> Snickers ($1.00)</label>
-      <label><input type="checkbox" name="items" value="Sour Patch ($1.50)"> Sour Patch ($1.50)</label>
-      <label><input type="checkbox" name="items" value="Gummies ($1.00)"> Gummies ($1.00)</label>
-      <label><input type="checkbox" name="items" value="Reese's ($1.00)"> Reese's ($1.00)</label>
-      <label><input type="checkbox" name="items" value="KitKat ($1.00)"> KitKat ($1.00)</label>
-
-      <label for="instructions">Special Instructions:</label>
-      <textarea id="instructions" name="instructions" placeholder="e.g., Blue Doritos"></textarea>
-
-      <button type="submit">Submit Order</button>
-    </form>
-
-    <div class="payment-options">
-      <h3>Payment Options</h3>
-      <ul>
-        <li>Cash (in school)</li>
-        <li><a href="https://cash.app/$YourCashAppUsername" target="_blank">Cash App</a></li>
-        <li><a href="https://venmo.com/YourVenmoUsername" target="_blank">Venmo</a></li>
-        <li><a href="https://paypal.me/YourPayPalLink" target="_blank">PayPal</a></li>
-      </ul>
-      <p class="note">We’ll contact you to confirm payment after your order is placed.</p>
-    </div>
-
-    <p><strong>Contact:</strong> <a href="mailto:yesbnsn@gmail.com">yesbnsn@gmail.com</a></p>
-  </div>
-
-  <footer>
-    &copy; 2025 The Snack Road. Snack smart.
-  </footer>
-
-  <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark");
-    }
-
-    const scriptURL = 'https://script.google.com/macros/s/AKfycby9ZvXwIQ73H_24AlC7WqnPLZinedHjGr6kEsfLHKC0lAXR57v-JaUWybV1WsB32ynS/exec';
-
-    document.getElementById('orderForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const form = e.target;
-      const name = form.name.value;
-      const instructions = form.instructions.value;
-      const items = Array.from(form.querySelectorAll('input[name="items"]:checked')).map(item => item.value).join(', ');
-      
-      fetch(scriptURL, {
-        method: 'POST',
-        body: new URLSearchParams({
-          'Name': name,
-          'Items': items,
-          'Instructions': instructions
-        })
-      }).then(response => {
-        alert('Order submitted! ✅');
-        form.reset();
-      }).catch(error => {
-        alert('Error! Try again later.');
-        console.error('Error!', error.message);
-      });
-    });
-  </script>
-</body>
-</html>
+      <label><input type="checkbox" name="items"
