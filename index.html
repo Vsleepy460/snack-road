@@ -1,135 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>The Snack Road</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Snack Road - School Snacks</title>
   <style>
-    :root {
-      --bg: #ffffff;
-      --text: #222222;
-      --card: #f7f7f7;
-    }
-    body.dark {
-      --bg: #121212;
-      --text: #f0f0f0;
-      --card: #1e1e1e;
-    }
-
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      background: #f7f7f7;
       margin: 0;
       padding: 0;
+      color: #333;
       transition: background 0.3s, color 0.3s;
     }
-
     header {
       background-color: #222;
       color: white;
       padding: 1.5rem;
       text-align: center;
     }
-
+    .dark-mode {
+      background-color: #111 !important;
+      color: #f5f5f5 !important;
+    }
     .container {
       max-width: 700px;
       margin: 2rem auto;
       padding: 1rem;
-      background: var(--card);
+      background: white;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-
-    h2, h3 {
+    .dark-mode .container {
+      background: #222;
+      color: #eee;
+    }
+    h2 {
       border-bottom: 2px solid #eee;
       padding-bottom: 0.5rem;
     }
-
-    label {
-      display: block;
-      margin: 0.75rem 0;
+    ul.menu {
+      list-style: none;
+      padding-left: 1rem;
     }
-
-    input[type="text"],
-    input[type="number"],
-    textarea {
+    ul.submenu {
+      list-style-type: disc;
+      margin-left: 1.5rem;
+      color: #555;
+    }
+    .dark-mode ul.submenu {
+      color: #ccc;
+    }
+    form label {
+      display: block;
+      margin-top: 1rem;
+    }
+    form input, form select, form textarea {
       width: 100%;
       padding: 0.5rem;
       margin-top: 0.3rem;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
-
-    button {
+    form button {
       margin-top: 1.5rem;
       background-color: #222;
       color: white;
-      padding: 0.75rem 1.5rem;
+      padding: 0.75rem;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
-
-    button:hover {
+    form button:hover {
       background-color: #444;
     }
-
-    .note {
-      font-size: 0.85rem;
-      color: #888;
-      display: block;
-      margin-left: 1.2rem;
-    }
-
-    .payment-options {
-      background: #eee;
-      padding: 1rem;
-      border-radius: 6px;
-      margin-top: 1.5rem;
-    }
-
     footer {
       text-align: center;
       padding: 1rem;
       font-size: 0.9rem;
       color: #666;
     }
-
-    .toggle-container {
+    .note {
+      font-size: 0.85rem;
+      color: #777;
+    }
+    .payment-options {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: #f1f1f1;
+      border-radius: 6px;
+    }
+    .dark-mode .payment-options {
+      background: #333;
+      color: #eee;
+    }
+    .dark-toggle {
       text-align: center;
       margin-top: 1rem;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>The Snack Road</h1>
-    <p>Your favorite snacks, right at school</p>
-  </header>
 
-  <div class="toggle-container">
-    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+<header>
+  <h1>The Snack Road</h1>
+  <p>Your favorite snacks, right at school</p>
+</header>
+
+<div class="dark-toggle">
+  <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+</div>
+
+<div class="container">
+  <h2>Menu</h2>
+  <ul class="menu">
+    <li><strong>Chips – $1.50</strong>
+      <ul class="submenu">
+        <li>Doritos <em>(Specify Red, Blue, or Purple in special instructions)</em></li>
+        <li>Ruffles</li>
+        <li>Lays</li>
+        <li>Fritos</li>
+        <li>SunChips</li>
+      </ul>
+    </li>
+    <li><strong>Drinks – $2.00</strong>
+      <ul class="submenu">
+        <li>Dr Pepper</li>
+        <li>Mountain Dew</li>
+        <li>Baja Blast</li>
+        <li>Sprite</li>
+        <li>Gatorade</li>
+      </ul>
+    </li>
+    <li><strong>Candy – $1.50</strong>
+      <ul class="submenu">
+        <li>Skittles</li>
+        <li>Snickers</li>
+        <li>Sour Patch</li>
+        <li>Gummies</li>
+        <li>Reese</li>
+        <li>KitKats</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>Place an Order</h2>
+  <form id="orderForm">
+    <label for="customerName">Your Name:</label>
+    <input type="text" id="customerName" name="name" required>
+
+    <label for="category">Choose Category:</label>
+    <select id="category" required>
+      <option value="">-- Select Category --</option>
+      <option value="Chips">Chips</option>
+      <option value="Drinks">Drinks</option>
+      <option value="Candy">Candy</option>
+    </select>
+
+    <label for="item">Choose Item:</label>
+    <select id="item" required>
+      <option value="">-- Select Item --</option>
+    </select>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" min="1" max="10" required>
+
+    <label for="notes">Special Instructions (optional):</label>
+    <textarea id="notes" rows="3" placeholder="Flavor, size, etc."></textarea>
+
+    <button type="submit">Submit Order</button>
+  </form>
+
+  <div class="payment-options">
+    <h3>Payment Options</h3>
+    <ul>
+      <li>In school (cash)</li>
+      <li>Cash App</li>
+      <li>Venmo</li>
+      <li>PayPal</li>
+    </ul>
+    <p class="note">We’ll contact you to confirm payment method after you order.</p>
   </div>
 
-  <div class="container">
-    <h2>Place an Order</h2>
-    <form id="orderForm">
-      <label for="customerName">Your Name:</label>
-      <input type="text" id="customerName" name="name" required>
+  <p><strong>Contact:</strong> <a href="mailto:yesbnsn@gmail.com">yesbnsn@gmail.com</a></p>
+</div>
 
-      <h3>Chips ($1.50)</h3>
-      <label><input type="checkbox" name="items" value="Doritos ($1.50)"> Doritos ($1.50)
-        <span class="note">(Specify Red, Blue, or Purple in special instructions)</span>
-      </label>
-      <label><input type="checkbox" name="items" value="Ruffles ($1.50)"> Ruffles ($1.50)</label>
-      <label><input type="checkbox" name="items" value="Lays ($1.50)"> Lays ($1.50)</label>
-      <label><input type="checkbox" name="items" value="Fritos ($1.50)"> Fritos ($1.50)</label>
-      <label><input type="checkbox" name="items" value="SunChips ($1.50)"> SunChips ($1.50)</label>
+<footer>
+  &copy; 2025 The Snack Road. Snack smart.
+</footer>
 
-      <h3>Drinks ($2.00)</h3>
-      <label><input type="checkbox" name="items" value="Dr Pepper ($2.00)"> Dr Pepper</label>
-      <label><input type="checkbox" name="items" value="Mountain Dew ($2.00)"> Mountain Dew</label>
-      <label><input type="checkbox" name="items" value="Baja Blast ($2.00)"> Baja Blast</label>
-      <label><input type="checkbox" name="items" value="Sprite ($2.00)"> Sprite</label>
-      <label><input type="checkbox" name="items"
+<script>
+  const itemOptions = {
+    Chips: [
+      "Doritos", "Ruffles", "Lays", "Fritos", "SunChips"
+    ],
+    Drinks: [
+      "Dr Pepper", "Mountain Dew", "Baja Blast", "Sprite", "Gatorade"
+    ],
+    Candy: [
+      "Skittles", "Snickers", "Sour Patch", "Gummies", "Reese", "KitKats"
+    ]
+  };
+
+  const category = document.getElementById('category');
+  const item = document.getElementById('item');
+
+  category.addEventListener('change', function () {
+    item.innerHTML = '<option value="">-- Select Item --</option>';
+    const selected = itemOptions[this.value];
+    if (selected) {
+      selected.forEach(i => {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = i;
+        item.appendChild(opt);
+      });
+    }
+  });
+
+  const scriptURL = 'https://script.google.com/macros/s/AKfycby9ZvXwIQ73H_24AlC7WqnPLZinedHjGr6kEsfLHKC0lAXR57v-JaUWybV1WsB32ynS/exec';
+
+  document.getElementById('orderForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const name = document.getElementById('customerName').value;
+    const cat = category.value;
+    const selectedItem = item.value;
+    const quantity = document.getElementById('quantity').value;
+    const notes = document.getElementById('notes').value;
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: new URLSearchParams({
+        name,
+        category: cat,
+        item: selectedItem,
+        quantity,
+        notes
+      })
+    }).then(() => alert('Order submitted!'))
+      .catch(err => alert('Something went wrong. Try again.'));
+  });
+
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+  }
+</script>
+
+</body>
+</html>
