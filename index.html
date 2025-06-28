@@ -220,26 +220,19 @@
 
   const scriptURL = 'https://script.google.com/macros/s/AKfycby9ZvXwIQ73H_24AlC7WqnPLZinedHjGr6kEsfLHKC0lAXR57v-JaUWybV1WsB32ynS/exec';
 
-  document.getElementById('orderForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const name = document.getElementById('customerName').value;
-    const cat = category.value;
-    const selectedItem = item.value;
-    const quantity = document.getElementById('quantity').value;
-    const notes = document.getElementById('notes').value;
+document.getElementById('orderForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
 
-    fetch(scriptURL, {
-      method: 'POST',
-      body: new URLSearchParams({
-        name,
-        category: cat,
-        item: selectedItem,
-        quantity,
-        notes
-      })
-    }).then(() => alert('Order submitted!'))
-      .catch(err => alert('Something went wrong. Try again.'));
-  });
+  fetch(scriptURL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: formData
+  })
+  .then(() => alert('Order submitted!'))
+  .catch(err => alert('Something went wrong. Try again.'));
+});
 
   function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
