@@ -145,31 +145,31 @@
   </ul>
 
   <h2>Place an Order</h2>
-  <form id="orderForm">
-    <label for="customerName">Your Name:</label>
-    <input type="text" id="customerName" name="name" required>
+  <form action="https://script.google.com/macros/s/AKfycby9ZvXwIQ73H_24AlC7WqnPLZinedHjGr6kEsfLHKC0lAXR57v-JaUWybV1WsB32ynS/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+    <label>Your Name:</label>
+    <input type="text" name="name" required>
 
-    <label for="category">Choose Category:</label>
-    <select id="category" required>
+    <label>Choose Category:</label>
+    <select name="category" required>
       <option value="">-- Select Category --</option>
       <option value="Chips">Chips</option>
       <option value="Drinks">Drinks</option>
       <option value="Candy">Candy</option>
     </select>
 
-    <label for="item">Choose Item:</label>
-    <select id="item" required>
-      <option value="">-- Select Item --</option>
-    </select>
+    <label>Item:</label>
+    <input type="text" name="item" required>
 
-    <label for="quantity">Quantity:</label>
-    <input type="number" id="quantity" name="quantity" min="1" max="10" required>
+    <label>Quantity:</label>
+    <input type="number" name="quantity" min="1" max="10" required>
 
-    <label for="notes">Special Instructions (optional):</label>
-    <textarea id="notes" rows="3" placeholder="Flavor, size, etc."></textarea>
+    <label>Special Instructions (optional):</label>
+    <textarea name="notes"></textarea>
 
     <button type="submit">Submit Order</button>
   </form>
+
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
 
   <div class="payment-options">
     <h3>Payment Options</h3>
@@ -190,50 +190,6 @@
 </footer>
 
 <script>
-  const itemOptions = {
-    Chips: [
-      "Doritos", "Ruffles", "Lays", "Fritos", "SunChips"
-    ],
-    Drinks: [
-      "Dr Pepper", "Mountain Dew", "Baja Blast", "Sprite", "Gatorade"
-    ],
-    Candy: [
-      "Skittles", "Snickers", "Sour Patch", "Gummies", "Reese", "KitKats"
-    ]
-  };
-
-  const category = document.getElementById('category');
-  const item = document.getElementById('item');
-
-  category.addEventListener('change', function () {
-    item.innerHTML = '<option value="">-- Select Item --</option>';
-    const selected = itemOptions[this.value];
-    if (selected) {
-      selected.forEach(i => {
-        const opt = document.createElement('option');
-        opt.value = i;
-        opt.textContent = i;
-        item.appendChild(opt);
-      });
-    }
-  });
-
-  const scriptURL = 'https://script.google.com/macros/s/AKfycby9ZvXwIQ73H_24AlC7WqnPLZinedHjGr6kEsfLHKC0lAXR57v-JaUWybV1WsB32ynS/exec';
-
-document.getElementById('orderForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const form = e.target;
-  const formData = new FormData(form);
-
-  fetch(scriptURL, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: formData
-  })
-  .then(() => alert('Order submitted!'))
-  .catch(err => alert('Something went wrong. Try again.'));
-});
-
   function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
   }
