@@ -4,183 +4,186 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Snack Road</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* ===== Base Styles ===== */
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #1a1a1a;
-      color: #f0f0f0;
+      font-family: 'Poppins', sans-serif;
+      background: #f6f0ff;
+      color: #2d2d2d;
       transition: background 0.3s, color 0.3s;
     }
 
-    /* ===== Dark/Light Mode ===== */
-    body.light {
-      background-color: #f0f0f0;
-      color: #1a1a1a;
-    }
-
-    /* ===== Banner ===== */
     header {
-      background: linear-gradient(90deg, #8e2de2, #4a00e0);
-      padding: 20px;
+      background: linear-gradient(135deg, #7b2cbf, #9d4edd);
+      color: white;
+      padding: 1.2rem;
       text-align: center;
-      font-size: 2rem;
-      font-weight: bold;
-      color: white;
+      font-size: 1.8rem;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
 
-    /* ===== Dark Mode Toggle Button ===== */
-    #darkModeToggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 10px 15px;
+    .dark-mode {
+      background-color: #1a1a1a;
+      color: #f1f1f1;
+    }
+    .dark-mode header {
+      background: linear-gradient(135deg, #3d0070, #5a2a91);
+    }
+
+    .dark-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: white;
       border: none;
-      border-radius: 5px;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
       cursor: pointer;
-      background-color: #4a00e0;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+    .dark-mode .dark-toggle {
+      background: #444;
       color: white;
-      font-weight: bold;
     }
 
-    /* ===== Snack List ===== */
-    .snack-list {
+    main {
+      padding: 1rem;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    ul.snack-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
       flex-direction: column;
-      padding: 20px;
-      max-width: 500px;
-      margin: 0 auto;
+      gap: 1rem;
     }
 
-    .snack-item {
-      background-color: #2e2e2e;
-      margin: 10px 0;
-      padding: 15px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
+    li.snack {
+      background: #fff;
+      border-left: 8px solid #9d4edd;
+      border-radius: 12px;
+      padding: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-
-    .snack-item:hover {
-      transform: scale(1.02);
-      background-color: #3f2e6b;
+    li.snack:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
-
-    .snack-item.selected {
-      border: 2px solid #ffcc00;
+    .dark-mode li.snack {
+      background: #2a2a2a;
+      border-left: 8px solid #7b2cbf;
     }
 
     .snack-name {
-      font-size: 1.2rem;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .price {
+      font-size: 0.95rem;
+      color: #555;
+      margin-right: 1rem;
+    }
+    .dark-mode .price {
+      color: #bbb;
     }
 
-    .size-select {
-      margin-left: 10px;
-    }
-
-    /* ===== Order Button ===== */
-    #orderBtn {
-      margin: 20px auto;
-      display: block;
-      padding: 15px 25px;
-      font-size: 1.2rem;
-      background-color: #8e2de2;
-      color: white;
+    button.order {
+      padding: 0.4rem 0.9rem;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
+      background: #7b2cbf;
+      color: white;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.3s;
     }
-
-    #orderBtn:hover {
-      background-color: #4a00e0;
+    button.order:hover {
+      background: #9d4edd;
     }
   </style>
 </head>
 <body>
-  <header>The Snack Road</header>
-  <button id="darkModeToggle">Toggle Dark Mode</button>
+  <header>
+    🍬 The Snack Road
+    <button class="dark-toggle" onclick="toggleDarkMode()">🌙</button>
+  </header>
 
-  <div class="snack-list">
-    <div class="snack-item" data-name="KitKats">
-      <span class="snack-name">KitKats</span>
-      <select class="size-select">
-        <option value="1">Single - $1.50</option>
-        <option value="3">Pack of 3 - $4.00</option>
-      </select>
-    </div>
-    <div class="snack-item" data-name="Reese's">
-      <span class="snack-name">Reese's</span>
-      <select class="size-select">
-        <option value="1">Single - $1.50</option>
-        <option value="3">Pack of 3 - $4.00</option>
-      </select>
-    </div>
-    <div class="snack-item" data-name="Pop-Tarts">
-      <span class="snack-name">Pop-Tarts - $2.00</span>
-    </div>
-    <div class="snack-item" data-name="Goldfish">
-      <span class="snack-name">Goldfish - $1.50</span>
-    </div>
-    <div class="snack-item" data-name="Cosmic Muffins">
-      <span class="snack-name">Cosmic Muffins - $2.00</span>
-    </div>
-    <div class="snack-item" data-name="Oatmeal Cream Pies">
-      <span class="snack-name">Oatmeal Cream Pies - $2.00</span>
-    </div>
-    <div class="snack-item" data-name="Drinkable Vitamins">
-      <span class="snack-name">Drinkable Vitamins - $2.50</span>
-    </div>
-    <div class="snack-item" data-name="Cookies">
-      <span class="snack-name">Cookies - $1.50</span>
-    </div>
-    <div class="snack-item" data-name="BBQ Chips">
-      <span class="snack-name">BBQ Chips - $1.50</span>
-    </div>
-  </div>
-
-  <button id="orderBtn">Order Selected Items</button>
+  <main>
+    <ul class="snack-list">
+      <li class="snack">
+        <span class="snack-name">KitKat</span>
+        <span class="price">$0.75</span>
+        <button class="order" onclick="submitOrder('KitKat', 0.75)">Order</button>
+      </li>
+      <li class="snack">
+        <span class="snack-name">Reese Cup</span>
+        <span class="price">$0.75</span>
+        <button class="order" onclick="submitOrder('Reese Cup', 0.75)">Order</button>
+      </li>
+      <li class="snack">
+        <span class="snack-name">Jolly Rancher</span>
+        <span class="price">$0.75</span>
+        <button class="order" onclick="submitOrder('Jolly Rancher', 0.75)">Order</button>
+      </li>
+      <li class="snack">
+        <span class="snack-name">Nerds Gummy Cluster</span>
+        <span class="price">$1.00 - $5.00</span>
+        <button class="order" onclick="submitOrder('Nerds Gummy Cluster', '1.00 - 5.00')">Order</button>
+      </li>
+      <li class="snack">
+        <span class="snack-name">Goldfish</span>
+        <span class="price">$1.50</span>
+        <button class="order" onclick="submitOrder('Goldfish', 1.50)">Order</button>
+      </li>
+      <li class="snack">
+        <span class="snack-name">Pop-Tarts</span>
+        <span class="price">$2.00</span>
+        <button class="order" onclick="submitOrder('Pop-Tarts', 2.00)">Order</button>
+      </li>
+    </ul>
+  </main>
 
   <script>
-    // ===== Dark Mode Toggle =====
-    const toggle = document.getElementById('darkModeToggle');
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-    });
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
 
-    // ===== Select / Deselect Items =====
-    const items = document.querySelectorAll('.snack-item');
-    items.forEach(item => {
-      item.addEventListener('click', () => {
-        item.classList.toggle('selected');
-      });
-    });
+    async function submitOrder(item, price) {
+      const name = prompt("Enter your name:");
+      if (!name) return;
 
-    // ===== Order Button =====
-    document.getElementById('orderBtn').addEventListener('click', () => {
-      const selectedItems = [];
-      items.forEach(item => {
-        if (item.classList.contains('selected')) {
-          const name = item.dataset.name;
-          const sizeSelect = item.querySelector('.size-select');
-          const size = sizeSelect ? sizeSelect.value : '1';
-          selectedItems.push({ name, size });
-        }
-      });
+      const notes = prompt("Any notes? (optional)") || "";
 
-      if(selectedItems.length === 0){
-        alert('Please select some items to order!');
-        return;
+      const formData = new URLSearchParams();
+      formData.append("name", name);
+      formData.append("item", item);
+      formData.append("price", price);
+      formData.append("notes", notes);
+
+      try {
+        let response = await fetch("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL", {
+          method: "POST",
+          body: formData
+        });
+
+        let result = await response.text();
+        alert("✅ Order submitted: " + result);
+      } catch (err) {
+        alert("❌ Error submitting order: " + err.message);
       }
-
-      // Send to backend / Google Sheets here
-      alert('You ordered: ' + JSON.stringify(selectedItems));
-    });
+    }
   </script>
 </body>
 </html>
