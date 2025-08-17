@@ -9,17 +9,17 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background-color: #f9f9f9;
-      color: #222;
+      background-color: #f4f0ff;
+      color: #2d2d2d;
       transition: background 0.3s, color 0.3s;
     }
 
     header {
-      background: linear-gradient(135deg, #ff6f61, #ff9966);
+      background: linear-gradient(135deg, #6a0dad, #9a4dff);
       color: white;
       padding: 1rem;
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 600;
       position: sticky;
       top: 0;
@@ -27,11 +27,11 @@
     }
 
     .dark-mode {
-      background-color: #121212;
+      background-color: #1a1a1a;
       color: #f1f1f1;
     }
     .dark-mode header {
-      background: linear-gradient(135deg, #333, #444);
+      background: linear-gradient(135deg, #3d0070, #5a2a91);
     }
 
     .dark-toggle {
@@ -53,82 +53,121 @@
 
     .container {
       padding: 1rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      display: flex;
+      flex-direction: column;
       gap: 1rem;
+      max-width: 600px;
+      margin: auto;
     }
 
     .card {
       background: white;
-      border-radius: 15px;
+      border-radius: 12px;
       padding: 1rem;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
       transition: transform 0.2s, box-shadow 0.2s;
     }
     .dark-mode .card {
-      background: #1e1e1e;
+      background: #2a2a2a;
     }
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
 
     .price {
       font-size: 1rem;
       color: #555;
+      margin-right: 1rem;
     }
     .dark-mode .price {
-      color: #aaa;
+      color: #bbb;
     }
 
     button.order {
-      margin-top: 0.5rem;
-      padding: 0.5rem 1rem;
+      padding: 0.4rem 0.9rem;
       border: none;
-      border-radius: 12px;
-      background: #ff6f61;
+      border-radius: 8px;
+      background: #6a0dad;
       color: white;
       cursor: pointer;
       transition: background 0.3s;
     }
     button.order:hover {
-      background: #ff856f;
+      background: #8533ff;
     }
   </style>
 </head>
 <body>
   <header>
-    🍫 The Snack Road
+    🍬 The Snack Road
     <button class="dark-toggle" onclick="toggleDarkMode()">🌙</button>
   </header>
 
   <main class="container">
     <div class="card">
-      <h3>KitKat</h3>
-      <p class="price">$0.75</p>
-      <button class="order">Order</button>
+      <span>KitKat</span>
+      <span class="price">$0.75</span>
+      <button class="order" onclick="submitOrder('KitKat', 0.75)">Order</button>
     </div>
     <div class="card">
-      <h3>Reese Cup</h3>
-      <p class="price">$0.75</p>
-      <button class="order">Order</button>
+      <span>Reese Cup</span>
+      <span class="price">$0.75</span>
+      <button class="order" onclick="submitOrder('Reese Cup', 0.75)">Order</button>
     </div>
     <div class="card">
-      <h3>Jolly Rancher</h3>
-      <p class="price">$0.75</p>
-      <button class="order">Order</button>
+      <span>Jolly Rancher</span>
+      <span class="price">$0.75</span>
+      <button class="order" onclick="submitOrder('Jolly Rancher', 0.75)">Order</button>
     </div>
     <div class="card">
-      <h3>Nerds Gummy Cluster</h3>
-      <p class="price">$1.00 - $5.00</p>
-      <button class="order">Order</button>
+      <span>Nerds Gummy Cluster</span>
+      <span class="price">$1.00 - $5.00</span>
+      <button class="order" onclick="submitOrder('Nerds Gummy Cluster', '1.00 - 5.00')">Order</button>
+    </div>
+    <div class="card">
+      <span>Goldfish</span>
+      <span class="price">$1.50</span>
+      <button class="order" onclick="submitOrder('Goldfish', 1.50)">Order</button>
+    </div>
+    <div class="card">
+      <span>Pop-Tarts</span>
+      <span class="price">$2.00</span>
+      <button class="order" onclick="submitOrder('Pop-Tarts', 2.00)">Order</button>
     </div>
   </main>
 
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle("dark-mode");
+    }
+
+    async function submitOrder(item, price) {
+      const name = prompt("Enter your name:");
+      if (!name) return;
+
+      const notes = prompt("Any notes? (optional)") || "";
+
+      const formData = new URLSearchParams();
+      formData.append("name", name);
+      formData.append("item", item);
+      formData.append("price", price);
+      formData.append("notes", notes);
+
+      try {
+        let response = await fetch("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL", {
+          method: "POST",
+          body: formData
+        });
+
+        let result = await response.text();
+        alert("✅ Order submitted: " + result);
+      } catch (err) {
+        alert("❌ Error submitting order: " + err.message);
+      }
     }
   </script>
 </body>
